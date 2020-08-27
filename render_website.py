@@ -1,14 +1,11 @@
+from livereload import Server, shell
 import json
 import os
+import urllib
+from urllib.parse import urlencode
 from http.server import HTTPServer, SimpleHTTPRequestHandler
-
 from jinja2 import Environment, FileSystemLoader, select_autoescape
-
-env = Environment(
-    loader=FileSystemLoader('.'),
-    autoescape=select_autoescape(['html', 'xml'])
-)
-template = env.get_template('template.html')
+from livereload import Server
 
 directory = 'dest_folder/json'
 file_name = 'books_catalog.json'
@@ -22,15 +19,24 @@ def get_catalog(directory, file_name):
         return books_catalog
 
 
-books_catalog = get_catalog(directory, file_name)
+def on_reload():
+    env = Environment(
+        loader=FileSystemLoader('.'),
+        autoescape=select_autoescape(['html', 'xml'])
+    )
+    template = env.get_template('template.html')
+
+    books_catalog = get_catalog(directory, file_name)
+    rendered_page = template.render(
+        books=books_catalog,
+    )
+    with open('index.html', 'w', encoding="utf8") as file:
+        file.write(rendered_page)
+    print('site rebuilded')
 
 
-rendered_page = template.render(
-    books=books_catalog,
-)
+on_reload()
 
-with open('index.html', 'w', encoding="utf8") as file:
-    file.write(rendered_page)
-
-server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
-server.serve_forever()
+server = Server()
+server.watch('template.html', on_reload)
+server.serve(root='.')
