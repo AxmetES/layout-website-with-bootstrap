@@ -6,6 +6,7 @@ from urllib.parse import urlencode
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
+from more_itertools import chunked
 
 directory = 'dest_folder/json'
 file_name = 'books_catalog.json'
@@ -27,8 +28,11 @@ def on_reload():
     template = env.get_template('template.html')
 
     books_catalog = get_catalog(directory, file_name)
+    first_catalog, second_catalog = chunked(books_catalog, 50)
+
     rendered_page = template.render(
-        books=books_catalog,
+        first_books=first_catalog,
+        second_books=second_catalog,
     )
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
