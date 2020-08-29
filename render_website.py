@@ -10,6 +10,9 @@ from more_itertools import chunked
 
 directory = 'dest_folder/json'
 file_name = 'books_catalog.json'
+pages_directory = 'pages'
+
+os.makedirs(pages_directory, exist_ok=True)
 
 
 def get_catalog(directory, file_name):
@@ -28,15 +31,18 @@ def on_reload():
     template = env.get_template('template.html')
 
     books_catalog = get_catalog(directory, file_name)
-    first_catalog, second_catalog = chunked(books_catalog, 50)
+    pages = chunked(books_catalog, 20)
 
-    rendered_page = template.render(
-        first_books=first_catalog,
-        second_books=second_catalog,
-    )
-    with open('index.html', 'w', encoding="utf8") as file:
-        file.write(rendered_page)
-    print('site rebuilded')
+    for num, page in enumerate(pages):
+        first_catalog, second_catalog = chunked(page, 10)
+        rendered_page = template.render(
+            first_books=first_catalog,
+            second_books=second_catalog,
+        )
+        index_directory = os.path.join(pages_directory, f'index{num}.html')
+        with open(index_directory, 'w', encoding="utf8") as file:
+            file.write(rendered_page)
+        print('site rebuilded')
 
 
 on_reload()
