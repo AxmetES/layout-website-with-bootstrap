@@ -1,4 +1,5 @@
 env/
 .vscode/
 /dest_folder
+/pages/dest_folder
 

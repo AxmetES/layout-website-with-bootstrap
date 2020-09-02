@@ -11,6 +11,42 @@
 </head>
 
 <body>
+<div class="mx-auto" style="width: 200px;">
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            {% if current_page =<&lt %}
+            <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="index{{current_page - 1}}.html" tabindex="-1"
+                   aria-disabled="true">Previous</a>
+            </li>
+            {% endif %}
+            {% for page in range(1, all_pages + 1) %}
+            {% if current_page == page%}
+            <li class="page-item active" aria-current="page">
+                <a class="page-link" href="index{{page}}.html">{{page}} <span class="sr-only">(current)</span></a>
+            </li>
+            {% else %}
+            <li class="page-item"><a class="page-link" href="index{{page}}.html">{{page}}</a></li>
+            {% endif %}
+            {% endfor %}
+            {% if current_page >= all_pages%}
+            <li class="page-item disabled">
+                <a class="page-link">Next</a>
+            </li>
+            {% else %}
+            <li class="page-item">
+                <a class="page-link" href="index{{current_page + 1}}.html" tabindex="-1" aria-disabled="true">Next</a>
+            </li>
+            {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>
+
 
 <div class="container">
     <div class="row">
@@ -19,13 +55,18 @@
             <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
+                        {%if first_book.img_src%}
                         <img src="{{first_book.img_src}}" class="card-img" alt="NO IMAGE">
+                        {% else %}
+                        <img src="{{pages/dest_folder/nopic.gif}}" class="card-img" alt="NO IMAGE">
+                        {% endif %}
                     </div>
                     <div class="col-md-8">
                         <div class="card-body">
                             <h5 class="card-title">{{first_book.title}}</h5>
                             <p class="card-text">{{first_book.author}}</p>
-                            <p class="card-text"><small class="text-muted"><a href="{{first_book.book_path}}">Читать</a></small></p>
+                            <p class="card-text"><small class="text-muted"><a href="{{first_book.book_path}}">Читать</a></small>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -44,7 +85,8 @@
                         <div class="card-body">
                             <h5 class="card-title">{{second_book.title}}</h5>
                             <p class="card-text">{{second_book.author}}</p>
-                            <p class="card-text"><small class="text-muted"><a href="{{second_book.book_path}}">Читать</a></small></p>
+                            <p class="card-text"><small class="text-muted"><a
+                                    href="{{second_book.book_path}}">Читать</a></small></p>
                         </div>
                     </div>
                 </div>
@@ -53,6 +95,7 @@
         </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
