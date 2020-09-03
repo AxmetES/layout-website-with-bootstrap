@@ -7,9 +7,9 @@ install dependencies:
 ```bat
  pip install -r requirements.txt
 ``` 
-### Deploy example.
+## Deploy example.
 Project deployed on [GitHub Pages](GitHub Pages)
 
- ## Motivation
- The code is written for educational purposes - this is a lesson in Python and web development on the site [Devman](https://dvmn.org).
+## Motivation
+The code is written for educational purposes - this is a lesson in Python and web development on the site [Devman](https://dvmn.org).
   
