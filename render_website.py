@@ -1,9 +1,5 @@
-from livereload import Server, shell
 import json
 import os
-import urllib
-from urllib.parse import urlencode
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
