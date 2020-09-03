@@ -6,7 +6,7 @@ Web library, books information taken form json file, it was parsed from [tululu.
 ##### Offline
 - Clone repository from github.
 - In directory ```pages```, click 
-```index#.htlm``` file to start.
+```index1.htlm``` file to start.
 
 ##### Online
 - Clone repository, 
