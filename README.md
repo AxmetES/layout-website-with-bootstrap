@@ -1,6 +1,8 @@
 ## Project "web library" site.
 Web library, books information taken form json file, it was parsed from [tululu.org](tululu.org). Json file directory:
  ```layout-website-with-bootstrap/pages/dest_folder/json```
+ 
+ ![Screenshot](Screenshot.png)
 
 ## Get start
 ##### Offline
