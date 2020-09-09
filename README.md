@@ -4,7 +4,7 @@ Web library, books information taken form json file, it was parsed from [tululu.
  
  ![Screenshot](Screenshot.png)
 
-## Get start
+## Get started
 ##### Offline
 - Clone repository from github.
 - In directory ```pages```, click 
