@@ -1,11 +1,13 @@
 import json
 import os
+from urllib.parse import quote, quote_from_bytes, urlencode, quote_plus
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from livereload import Server
 from more_itertools import chunked
 from math import ceil
 
-directory = 'pages/dest_folder/json'
+directory = 'media'
 file_name = 'books_catalog.json'
 pages_directory = 'pages'
 
@@ -14,8 +16,6 @@ os.makedirs(pages_directory, exist_ok=True)
 
 def get_catalog(directory, file_name):
     catalog_directory = os.path.join(directory, file_name)
-    print(file_name)
-    print(catalog_directory)
     with open(catalog_directory, 'r') as file:
         catalog_file = file.read()
         books_catalog = json.loads(catalog_file)
@@ -31,11 +31,10 @@ def on_reload():
 
     books_catalog = get_catalog(directory, file_name)
     pages = chunked(books_catalog, 20)
-    all_pages = chunked(books_catalog, 20)
-    site_pages = len(list(all_pages))
-    print(site_pages)
+    all_pages = list(pages)
+    site_pages = len(all_pages)
 
-    for page_num, page in enumerate(pages, 1):
+    for page_num, page in enumerate(all_pages, 1):
         half_page = len(page) / 2
         first_catalog, second_catalog = chunked(page, ceil(half_page))
 
@@ -49,7 +48,6 @@ def on_reload():
         index_directory = os.path.join(pages_directory, f'index{page_num}.html')
         with open(index_directory, 'w', encoding="utf8") as file:
             file.write(rendered_page)
-        print('site rebuild')
 
 
 on_reload()
