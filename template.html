@@ -16,34 +16,34 @@
 <div class="mx-auto mt-3" style="width: 200px;">
     <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
-            {% if current_page <=1 %}
-            <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-            </li>
-            {% else %}
+                {% if current_page <=1 %}
+                    <li class="page-item disabled">
+                        <a class="page-link">Previous</a>
+                    </li>
+                {% else %}
             <li class="page-item">
                 <a class="page-link" href="index{{current_page - 1}}.html" tabindex="-1"
                    aria-disabled="true">Previous</a>
             </li>
-            {% endif %}
-            {% for page in range(1, all_pages + 1) %}
-            {% if current_page == page%}
+                {% endif %}
+                {% for page in range(1, pages_count + 1) %}
+                {% if current_page == page%}
             <li class="page-item active" aria-current="page">
                 <a class="page-link" href="index{{page}}.html">{{page}} <span class="sr-only">(current)</span></a>
             </li>
-            {% else %}
+                {% else %}
             <li class="page-item"><a class="page-link" href="index{{page}}.html">{{page}}</a></li>
-            {% endif %}
-            {% endfor %}
-            {% if current_page >= all_pages%}
+                {% endif %}
+                {% endfor %}
+                {% if current_page >= pages_count%}
             <li class="page-item disabled">
                 <a class="page-link">Next</a>
             </li>
-            {% else %}
-            <li class="page-item">
-                <a class="page-link" href="index{{current_page + 1}}.html" tabindex="-1" aria-disabled="true">Next</a>
-            </li>
-            {% endif %}
+                {% else %}
+                    <li class="page-item">
+                        <a class="page-link" href="index{{current_page + 1}}.html" tabindex="-1" aria-disabled="true">Next</a>
+                    </li>
+                {% endif %}
         </ul>
     </nav>
 </div>
@@ -53,13 +53,13 @@
     <div class="row">
         <div class="col">
             {%for first_book in first_books%}
-            <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         {%if first_book.img_src%}
-                        <img src="../{{first_book.img_src|urlencode}}" class="card-img" alt="NO IMAGE">
+                            <img src="../{{first_book.img_src|urlencode}}" class="card-img" alt="NO IMAGE">
                         {% else %}
-                        <img src="../{{media/imgs/nopic.gif|urlencode}}" class="card-img" alt="NO IMAGE">
+                            <img src="../{{media/imgs/nopic.gif|urlencode}}" class="card-img" alt="NO IMAGE">
                         {% endif %}
                     </div>
                     <div class="col-md-8">
@@ -69,11 +69,11 @@
                             <div class="row-ml-1">
                                 <div class="row no-gutters">
                                     {%for genre in first_book.genres%}
-                                    <p class="card-text"><span class="badge badge-light">{{genre}}</span></p>
+                                        <p class="card-text"><span class="badge badge-light">{{genre}}</span></p>
                                     {%endfor%}
                                 </div>
                             </div>
-                            <h5><a href="../{{first_book.book_path|urlencode}}" class="badge badge-info">Читать</a></h5>
+                            <h5><a href="../{{first_book.book_path|urlencode}}" target="_blank" class="badge badge-info">Читать</a></h5>
                         </div>
                     </div>
                 </div>
@@ -83,13 +83,13 @@
 
         <div class="col">
             {%for second_book in second_books%}
-            <div class="card mb-3" style="max-width: 540px;">
+                <div class="card mb-3" style="max-width: 540px;">
                 <div class="row no-gutters">
                     <div class="col-md-4">
                         {%if second_book.img_src%}
-                        <img src="../{{second_book.img_src|urlencode}}" class="card-img" alt="NO IMAGE">
+                            <img src="../{{second_book.img_src|urlencode}}" class="card-img" alt="NO IMAGE">
                         {% else %}
-                        <img src="../{{media/imgs/nopic.gif|urlencode}}" class="card-img" alt="NO IMAGE">
+                            <img src="../{{media/imgs/nopic.gif|urlencode}}" class="card-img" alt="NO IMAGE">
                         {% endif %}
                     </div>
                     <div class="col-md-8">
@@ -99,11 +99,11 @@
                             <div class="row-ml-1">
                                 <div class="row no-gutters">
                                     {%for genre in second_book.genres%}
-                                    <p class="card-text"><span class="badge badge-light">{{genre}}</span></p>
+                                        <p class="card-text"><span class="badge badge-light">{{genre}}</span></p>
                                     {%endfor%}
                                 </div>
                             </div>
-                            <h5><a href="../{{second_book.book_path|urlencode}}" class="badge badge-info">Читать</a>
+                            <h5><a href="../{{second_book.book_path|urlencode}}" target="_blank" class="badge badge-info">Читать</a>
                             </h5>
                         </div>
                     </div>
